@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name="VisualizarAsignaturas",
             query="SELECT s.school FROM SchoolSubject s WHERE s.subject.name=:nombre"),
+    
 })
 @Entity
 @Table(name="SCHOOLSUBJECT", schema="studentdb")

@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +23,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author aitor
  */
+@NamedQueries({
+    @NamedQuery(name="VisualizarEstudiante",
+            query="SELECT s FROM Student s WHERE s.school.name=:nombre"),
+    
+})
 @Entity
 @Table(name="STUDENT", schema="studentdb")
 @XmlRootElement

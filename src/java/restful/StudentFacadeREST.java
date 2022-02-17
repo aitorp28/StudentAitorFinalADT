@@ -6,6 +6,7 @@
 package restful;
 
 import entities.Student;
+import exception.SelectCollectionException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -74,6 +75,23 @@ public class StudentFacadeREST extends AbstractFacade<Student> {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Student> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
+    }
+    
+    @GET
+    @Path("nombre/{nombre}")
+    @Produces({MediaType.APPLICATION_XML})
+    public List<Student> VisualizarEstudiante(@PathParam("nombre") String nombre) throws SelectCollectionException {
+         List<Student> resultado;
+        try{
+            resultado = em.createNamedQuery("VisualizarEstudiante")
+                    .setParameter("nombre", nombre)
+                    .getResultList();
+                            
+            
+        }catch(Exception e){
+            throw new SelectCollectionException(e.getMessage());
+        }
+        return resultado;
     }
 
     @GET
